@@ -1,7 +1,3 @@
-@import "./reset.css";
-@import "./common.css";
-@import "./wiki-layout.css";
-
 /* ===========================
    CSS Variables & Reset
    =========================== */
@@ -520,4 +516,174 @@ main {
         width: 100%;
         height: 180px;
     }
+}
+
+/* ===========================
+   TIL 애니메이션 & 삭제 버튼
+   =========================== */
+@keyframes til-slide-in {
+    from {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes til-fade-out {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+}
+
+.til-item--new {
+    animation: til-slide-in 0.3s ease forwards;
+}
+
+.til-item--removing {
+    animation: til-fade-out 0.25s ease forwards;
+}
+
+.til-item {
+    position: relative;
+}
+
+.til-delete-btn {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: 4px;
+    opacity: 0;
+    transition: opacity 0.15s, background 0.15s, color 0.15s;
+}
+
+.til-item:hover .til-delete-btn {
+    opacity: 1;
+}
+
+.til-delete-btn:hover {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+/* ===========================
+   내비게이션 활성 링크
+   =========================== */
+.nav-links a.nav-link--active {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+/* ===========================
+   갤러리 라이트박스
+   =========================== */
+#lightbox {
+    display: flex;
+    visibility: hidden;
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+}
+
+#lightbox.lightbox--active {
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.lightbox-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(6px);
+}
+
+.lightbox-img {
+    position: relative;
+    z-index: 1;
+    max-width: 88vw;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+    width: auto;
+    height: auto;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.5rem;
+    z-index: 2;
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: #fff;
+    font-size: 1.2rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.lightbox-close:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+.lightbox-prev,
+.lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.lightbox-prev { left: 1.5rem; }
+.lightbox-next { right: 1.5rem; }
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+.lightbox-caption {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.85rem;
+    font-family: 'Noto Sans KR', sans-serif;
+    white-space: nowrap;
 }
